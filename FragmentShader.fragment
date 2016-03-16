@@ -1,0 +1,6 @@
+attribute vec2 position;
+attribute vec4 color;
+void main()
+{
+    FragColor  = color;
+}
