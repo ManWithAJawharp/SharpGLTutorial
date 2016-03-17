@@ -83,6 +83,7 @@ void Shader_Manager::CreateProgram (const std::string& shaderName, const std::st
 
 	glLinkProgram(program);
 	glGetProgramiv(program, GL_LINK_STATUS, &link_result);
+
 	//check for link errors
 	if (link_result == GL_FALSE)
 	{
