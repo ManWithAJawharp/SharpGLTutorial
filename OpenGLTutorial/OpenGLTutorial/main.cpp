@@ -1,32 +1,46 @@
-#include <iostream>;
-#include <stdio.h>;
-#include <stdlib.h>;
-#include <fstream>;
-#include <vector>;
+#pragma once
+#include "Managers\Shader_Manager.h"
+#include "Core\GameModels.h"
 
-#include "Core\Shader_Loader.h";
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#include <vector>
 
-using namespace Core;
-
+Models::GameModels* gameModels;
+Managers::Shader_Manager* shaderManager;
 GLuint program;
 
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(1.0, 0.0, 0.0, 1.0);
+	glClearColor(0, 0, 0, 1.0);
 
+	glBindVertexArray(gameModels->GetModel("triangle1"));
 	glUseProgram(program);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-
 	glutSwapBuffers();
+}
+
+void closeCallback()
+{
+	std::cout << "GLUT:\t Finished" << std::endl;
+	glutLeaveMainLoop();
 }
 
 void Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	Core::Shader_Loader shaderLoader;
-	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
+	gameModels = new Models::GameModels();
+	gameModels->CreateTriangleModel("triangle1");
+
+	shaderManager = new Managers::Shader_Manager();
+
+	shaderManager->CreateProgram("colorShader", "Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
+
+	program = Managers::Shader_Manager::GetShader("colorShader");
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
@@ -44,9 +58,12 @@ int main(int argc, char **argv)
 	Init();
 
 	glutDisplayFunc(renderScene);
+	glutCloseFunc(closeCallback);
 
 	glutMainLoop();
-	glDeleteProgram(program);
+
+	delete gameModels;
+	delete shaderManager;
 
 	return 0;
 }

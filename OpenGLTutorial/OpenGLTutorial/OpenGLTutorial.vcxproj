@@ -114,13 +114,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Shader_Loader.cpp" />
+    <ClCompile Include="Core\GameModels.cpp" />
+    <ClCompile Include="Managers\Shader_Manager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Shader_Loader.h" />
+    <ClInclude Include="Core\GameModels.h" />
+    <ClInclude Include="Managers\Shader_Manager.h" />
+    <ClInclude Include="Core\VertexFormat.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
