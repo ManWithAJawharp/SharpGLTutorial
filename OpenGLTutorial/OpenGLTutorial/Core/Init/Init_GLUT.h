@@ -20,8 +20,8 @@ namespace Core
 			static void run();
 			static void close();
 
-			void enterFullScreen();
-			void exitFullScreen();
+			static void enterFullScreen();
+			static void exitFullScreen();
 
 			static void printOpenGLInfo(const Core::WindowInfo& windowInfo,
 				const Core::ContextInfo& context);

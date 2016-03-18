@@ -9,6 +9,11 @@ Models_Manager::Models_Manager()
 	triangle->SetProgram(Shader_Manager::GetShader("colorShader"));
 	triangle->Create();
 	gameModelList["triangle"] = triangle;
+
+	Models::Quad* quad = new Models::Quad();
+	quad->SetProgram(Shader_Manager::GetShader("colorShader"));
+	quad->Create();
+	gameModelList["quad"] = quad;
 }
 
 Models_Manager::~Models_Manager()
@@ -36,10 +41,10 @@ void Models_Manager::Update()
 	}
 }
 
-void Models_Manager::Draw()
+void Models_Manager::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix)
 {
 	for (auto model : gameModelList)
 	{
-		model.second->Draw();
+		model.second->Draw(projection_matrix, view_matrix);
 	}
 }
