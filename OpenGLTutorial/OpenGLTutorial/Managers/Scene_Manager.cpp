@@ -12,9 +12,11 @@ Scene_Manager::Scene_Manager()
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
-		0, 0, 10, 1);
+		0, 0, 1, 1);
 
 	models_manager = new Models_Manager();
+
+	time = 0.0;
 }
 
 Scene_Manager::~Scene_Manager()
@@ -25,6 +27,7 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
+	time += 1.0 / 60;
 	models_manager->Update();
 }
 
@@ -33,7 +36,7 @@ void Scene_Manager::notifyDisplayFrame()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.1, 0.3, 0.1, 1);
 
-	models_manager->Draw(projection_matrix, view_matrix);
+	models_manager->Draw(projection_matrix, view_matrix, time);
 }
 
 void Scene_Manager::notifyEndFrame()

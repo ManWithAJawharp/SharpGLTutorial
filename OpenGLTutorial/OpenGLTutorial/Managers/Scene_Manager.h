@@ -11,6 +11,8 @@ namespace Managers
 		Scene_Manager();
 		~Scene_Manager();
 
+		static float GetTime();
+
 		virtual void notifyBeginFrame();
 		virtual void notifyDisplayFrame();
 		virtual void notifyEndFrame();
@@ -22,5 +24,7 @@ namespace Managers
 
 		glm::mat4 projection_matrix;
 		glm::mat4 view_matrix;
+
+		float time;
 	};
 }
