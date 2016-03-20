@@ -42,6 +42,9 @@
     <ClCompile Include="Rendering\Models\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Models\Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Managers\Shader_Manager.h">
@@ -86,10 +89,40 @@
     <ClInclude Include="Rendering\Models\Quad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\freeglut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\freeglut_ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\freeglut_std.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\glut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\glew\glew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\glew\glxew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\glew\wglew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Models\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Vertex_Shader.glsl" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="packages.config" />
+    <None Include="Dependencies\freeglut\freeglut.dll" />
+    <None Include="Dependencies\glew\glew32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\freeglut\freeglut.lib" />
+    <Library Include="Dependencies\glew\glew32.lib" />
   </ItemGroup>
 </Project>

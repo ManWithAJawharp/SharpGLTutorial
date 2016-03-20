@@ -12,7 +12,9 @@ Scene_Manager::Scene_Manager()
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
-		0, 0, 1, 1);
+		0, 0, 3, 1);
+
+	//view_matrix = glm::
 
 	models_manager = new Models_Manager();
 

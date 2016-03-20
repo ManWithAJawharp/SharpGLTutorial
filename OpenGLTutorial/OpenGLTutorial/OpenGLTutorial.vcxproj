@@ -86,6 +86,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Dependencies\freeglut;Dependencies\glew</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,6 +124,7 @@
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rendering\Models\Cube.cpp" />
     <ClCompile Include="Rendering\Models\Model.cpp" />
     <ClCompile Include="Rendering\Models\Quad.cpp" />
     <ClCompile Include="Rendering\Models\Triangle.cpp" />
@@ -131,19 +136,33 @@
     <ClInclude Include="Core\Init\Init_GLEW.h" />
     <ClInclude Include="Core\Init\Init_GLUT.h" />
     <ClInclude Include="Core\Init\WindowInfo.h" />
+    <ClInclude Include="Dependencies\freeglut\freeglut.h" />
+    <ClInclude Include="Dependencies\freeglut\freeglut_ext.h" />
+    <ClInclude Include="Dependencies\freeglut\freeglut_std.h" />
+    <ClInclude Include="Dependencies\freeglut\glut.h" />
+    <ClInclude Include="Dependencies\glew\glew.h" />
+    <ClInclude Include="Dependencies\glew\glxew.h" />
+    <ClInclude Include="Dependencies\glew\wglew.h" />
     <ClInclude Include="Managers\Models_Manager.h" />
     <ClInclude Include="Managers\Scene_Manager.h" />
     <ClInclude Include="Managers\Shader_Manager.h" />
     <ClInclude Include="Rendering\IGameObject.h" />
+    <ClInclude Include="Rendering\Models\Cube.h" />
     <ClInclude Include="Rendering\Models\Model.h" />
     <ClInclude Include="Rendering\Models\Quad.h" />
     <ClInclude Include="Rendering\Models\Triangle.h" />
     <ClInclude Include="Rendering\VertexFormat.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dependencies\freeglut\freeglut.dll" />
+    <None Include="Dependencies\glew\glew32.dll" />
     <None Include="packages.config" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Shaders\Vertex_Shader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\freeglut\freeglut.lib" />
+    <Library Include="Dependencies\glew\glew32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

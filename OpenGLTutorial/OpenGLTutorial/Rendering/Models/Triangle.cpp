@@ -4,7 +4,6 @@
 using namespace Rendering;
 using namespace Models;
 
-glm::mat4 model_matrix;
 float t;
 
 Triangle::Triangle()

@@ -1,5 +1,6 @@
 #pragma once
 #include "../IGameObject.h"
+#include "glm\glm.hpp"
 #include <vector>
 
 namespace Rendering
@@ -24,6 +25,8 @@ namespace Rendering
 			GLuint vao;
 			GLuint program;
 			std::vector<GLuint> vbos;
+
+			glm::mat4 model_matrix;
 		};
 	}
 }
