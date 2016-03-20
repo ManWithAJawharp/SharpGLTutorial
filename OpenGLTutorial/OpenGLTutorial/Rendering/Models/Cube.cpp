@@ -12,7 +12,7 @@ Cube::Cube()
 		0, 0, 0.5, 0,
 		0, 0, 0, 1);
 
-	float angle = 30;
+	float angle = 0.4;
 
 	model_matrix = glm::mat4(
 		1, 0, 0, 0,
