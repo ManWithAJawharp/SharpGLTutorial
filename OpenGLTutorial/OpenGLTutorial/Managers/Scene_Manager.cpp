@@ -12,7 +12,15 @@ Scene_Manager::Scene_Manager()
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
-		0, 0, 3, 1);
+		0, -1.2, 3, 1);
+
+	float angle = 0.4;
+
+	view_matrix = glm::mat4(
+		1, 0, 0, 0,
+		0, glm::cos(angle), -glm::sin(angle), 0,
+		0, glm::sin(angle), glm::cos(angle), 0,
+		0, 0, 0, 1) * view_matrix;
 
 	//view_matrix = glm::
 

@@ -4,8 +4,6 @@
 using namespace Rendering;
 using namespace Models;
 
-float t;
-
 Triangle::Triangle()
 {
 	model_matrix = glm::mat4(
@@ -13,8 +11,6 @@ Triangle::Triangle()
 		0.0, 1.0, 0.0, 0.0,
 		0.0, 0.0, 1.0, 0.0,
 		0.0, 0.0, 0.0, 1.0);
-
-	t = 0.0;
 }
 
 Triangle::~Triangle()
@@ -59,7 +55,7 @@ void Triangle::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_ma
 	model_matrix[3][1] = 0.5 * glm::sin(time);
 	model_matrix[3][0] = 0.5 * glm::cos(time);
 
-	glUseProgram(program);
+	//glUseProgram(program);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model_matrix"), 1, false, &model_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "view_matrix"), 1, false, &view_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "projection_matrix"), 1, false, &projection_matrix[0][0]);
