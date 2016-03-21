@@ -52,8 +52,8 @@ void Triangle::Update()
 
 void Triangle::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time)
 {
-	model_matrix[3][1] = 0.5 * glm::sin(time);
-	model_matrix[3][0] = 0.5 * glm::cos(time);
+	model_matrix[3][1] = 0.5f * glm::sin(time);
+	model_matrix[3][0] = 0.5f * glm::cos(time);
 
 	//glUseProgram(program);
 	glUniformMatrix4fv(glGetUniformLocation(program, "model_matrix"), 1, false, &model_matrix[0][0]);
