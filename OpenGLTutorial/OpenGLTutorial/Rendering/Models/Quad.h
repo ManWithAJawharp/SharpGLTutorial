@@ -8,7 +8,7 @@ namespace Rendering
 		class Quad : public Models::Model
 		{
 		public:
-			Quad();
+			Quad(glm:: vec3 position);
 			~Quad();
 
 			void Create();

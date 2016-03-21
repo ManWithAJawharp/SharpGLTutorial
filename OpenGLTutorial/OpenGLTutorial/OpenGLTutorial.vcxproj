@@ -126,6 +126,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rendering\Models\Cube.cpp" />
     <ClCompile Include="Rendering\Models\Model.cpp" />
+    <ClCompile Include="Rendering\Models\OBJLoader.cpp" />
     <ClCompile Include="Rendering\Models\Quad.cpp" />
     <ClCompile Include="Rendering\Models\Triangle.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Cube.h" />
     <ClInclude Include="Rendering\Models\Model.h" />
+    <ClInclude Include="Rendering\Models\OBJLoader.h" />
     <ClInclude Include="Rendering\Models\Quad.h" />
     <ClInclude Include="Rendering\Models\Triangle.h" />
     <ClInclude Include="Rendering\VertexFormat.h" />
@@ -156,7 +158,6 @@
   <ItemGroup>
     <None Include="Dependencies\freeglut\freeglut.dll" />
     <None Include="Dependencies\glew\glew32.dll" />
-    <None Include="packages.config" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
@@ -166,12 +167,12 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\glm.0.9.7.1\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.7.1\build\native\glm.targets')" />
+    <Import Project="..\packages\glm.0.9.6\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.6\build\native\glm.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\glm.0.9.7.1\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.7.1\build\native\glm.targets'))" />
+    <Error Condition="!Exists('..\packages\glm.0.9.6\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.6\build\native\glm.targets'))" />
   </Target>
 </Project>

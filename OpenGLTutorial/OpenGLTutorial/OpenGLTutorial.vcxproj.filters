@@ -45,6 +45,9 @@
     <ClCompile Include="Rendering\Models\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Models\OBJLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Managers\Shader_Manager.h">
@@ -113,11 +116,13 @@
     <ClInclude Include="Rendering\Models\Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\Models\OBJLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Vertex_Shader.glsl" />
     <None Include="Shaders\Fragment_Shader.glsl" />
-    <None Include="packages.config" />
     <None Include="Dependencies\freeglut\freeglut.dll" />
     <None Include="Dependencies\glew\glew32.dll" />
   </ItemGroup>

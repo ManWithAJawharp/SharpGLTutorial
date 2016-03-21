@@ -7,22 +7,8 @@ Scene_Manager::Scene_Manager()
 
 	shader_manager = new Shader_Manager();
 	shader_manager->CreateProgram("colorShader", "Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
-	
-	view_matrix = glm::mat4(
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, -1.2, 3, 1);
 
-	float angle = 0.4;
-
-	view_matrix = glm::mat4(
-		1, 0, 0, 0,
-		0, glm::cos(angle), -glm::sin(angle), 0,
-		0, glm::sin(angle), glm::cos(angle), 0,
-		0, 0, 0, 1) * view_matrix;
-
-	//view_matrix = glm::
+	view_matrix = glm::lookAt(glm::vec3(0, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	models_manager = new Models_Manager();
 
@@ -37,7 +23,12 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
+	
+
 	time += 1.0 / 60;
+
+	view_matrix = glm::lookAt(glm::vec3(3 * glm::cos(time), 1.5 * sin(0.5 * time) + 2, 3 * glm::sin(time)), glm::vec3(0, 0.5, 0), glm::vec3(0, 1, 0));
+
 	models_manager->Update();
 }
 
@@ -65,4 +56,6 @@ void Scene_Manager::notifyReshape(int width, int height, int prev_width, int pre
 	projection_matrix[2][2] = (-near1 - far1) / (near1 - far1);
 	projection_matrix[2][3] = 1.0f;
 	projection_matrix[3][2] = 2.0f * near1 * far1 / (near1 - far1);
+
+	projection_matrix = glm::perspective(45.0f, 1.5f, 0.1f, 2000.0f);
 }

@@ -8,7 +8,7 @@ namespace Rendering
 		class Cube : public Model
 		{
 		public:
-			Cube();
+			Cube(glm::vec3 position);
 			~Cube();
 
 			void Create();

@@ -1,6 +1,8 @@
 #pragma once
 #include "../IGameObject.h"
+#include "OBJLoader.h"
 #include "glm\glm.hpp"
+#include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
 namespace Rendering
@@ -10,7 +12,8 @@ namespace Rendering
 		class Model : public IGameObject
 		{
 		public:
-			Model();
+			Model(glm::vec3 position);
+			Model(const char* path, glm::vec3 position);
 			virtual ~Model();
 
 			virtual void Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time) override;
@@ -26,6 +29,7 @@ namespace Rendering
 			GLuint program;
 			std::vector<GLuint> vbos;
 
+			glm::vec3 position;
 			glm::mat4 model_matrix;
 		};
 	}

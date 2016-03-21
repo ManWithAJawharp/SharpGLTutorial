@@ -15,10 +15,14 @@ Models_Manager::Models_Manager()
 	quad->Create();
 	gameModelList["quad"] = quad;*/
 
-	Models::Cube* cube = new Models::Cube();
+	Models::Cube* cube = new Models::Cube(glm::vec3(0, -1, 0));
 	cube->SetProgram(Shader_Manager::GetShader("colorShader"));
 	cube->Create();
 	gameModelList["cube"] = cube;
+
+	Models::Model* priest = new Models::Model("Rendering\\Models\\Priest.obj", glm::vec3(0, 0, 0));
+	priest->SetProgram(Shader_Manager::GetShader("colorShader"));
+	gameModelList["priest"] = priest;
 }
 
 Models_Manager::~Models_Manager()

@@ -5,6 +5,9 @@ using namespace Core::Init;
 Core::IListener* Init_GLUT::listener = NULL;
 Core::WindowInfo Init_GLUT::windowInformation;
 
+double lastTime = 0;
+int nbFrames = 0;
+
 void Init_GLUT::init(const Core::WindowInfo& windowInfo,
 	const Core::ContextInfo& contextInfo,
 	const Core::FramebufferInfo& framebufferInfo)
@@ -64,6 +67,17 @@ void Init_GLUT::idleCallback(void)
 
 void Init_GLUT::displayCallback()
 {
+	double currentTime = glutGet(GLUT_ELAPSED_TIME);
+
+	//std::cout << lastTime << ", " << currentTime << std::endl;
+	nbFrames++;
+	if (currentTime - lastTime >= 1000) { // If last prinf() was more than 1 sec ago
+										 // printf and reset timer
+		printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+		nbFrames = 0;
+		lastTime += 1000;
+	}
+
 	if (listener)
 	{
 		listener->notifyBeginFrame();

@@ -8,7 +8,7 @@ namespace Rendering
 		class Triangle : public Model
 		{
 		public:
-			Triangle();
+			Triangle(glm::vec3 position);
 			~Triangle();
 
 			void Create();
