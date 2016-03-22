@@ -20,9 +20,13 @@ Models_Manager::Models_Manager()
 	cube->Create();
 	gameModelList["cube"] = cube;
 
-	Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
+	/*Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
 	priest->SetProgram(Shader_Manager::GetShader("colorShader"));
-	gameModelList["priest"] = priest;
+	gameModelList["priest"] = priest;*/
+
+	Models::Model* suzanne = new Models::Model("Resources\\Models\\Suzanne.obj", glm::vec3(0, 1, 0));
+	suzanne->SetProgram(Shader_Manager::GetShader("colorShader"));
+	gameModelList["suzanne"] = suzanne;
 }
 
 Models_Manager::~Models_Manager()

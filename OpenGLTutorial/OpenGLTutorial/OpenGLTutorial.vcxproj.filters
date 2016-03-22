@@ -125,12 +125,16 @@
     <ClInclude Include="Rendering\BMPLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\BMP_Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Vertex_Shader.glsl" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Dependencies\freeglut\freeglut.dll" />
     <None Include="Dependencies\glew\glew32.dll" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\freeglut\freeglut.lib" />

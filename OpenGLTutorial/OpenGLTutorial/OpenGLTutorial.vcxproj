@@ -148,6 +148,7 @@
     <ClInclude Include="Managers\Models_Manager.h" />
     <ClInclude Include="Managers\Scene_Manager.h" />
     <ClInclude Include="Managers\Shader_Manager.h" />
+    <ClInclude Include="Rendering\BMP_Header.h" />
     <ClInclude Include="Rendering\BMPLoader.h" />
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Cube.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <None Include="Dependencies\freeglut\freeglut.dll" />
     <None Include="Dependencies\glew\glew32.dll" />
+    <None Include="packages.config" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>

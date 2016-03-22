@@ -1,13 +1,30 @@
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS
-#include "../Dependencies/freeglut/glut.h"
+#include "../Dependencies/glew/glew.h"
+#include "BMP_Header.h"
+#include <fstream>
 #include <iostream>
+#include <string>
 
 namespace Rendering
 {
-	class BMPLoader
+	class TextureLoader
 	{
 	public:
-		static GLuint LoadBMP(const char* path);
+		TextureLoader();
+		~TextureLoader();
+
+		static unsigned int LoadTexture(const std::string& filename,
+			unsigned int width,
+			unsigned int height);
+
+	private:
+
+		static void LoadBMPFile(const std::string& filename,
+			unsigned int& width,
+			unsigned int& height,
+			unsigned char*& data);
 	};
+
+
+
 }
