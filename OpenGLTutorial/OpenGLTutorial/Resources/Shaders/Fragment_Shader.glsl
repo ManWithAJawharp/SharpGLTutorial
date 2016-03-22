@@ -5,6 +5,7 @@ in vec2 uv;
 in vec3 normal;
 
 uniform float time;
+uniform sampler2D textureSampler;
 
 void main( void )
 {

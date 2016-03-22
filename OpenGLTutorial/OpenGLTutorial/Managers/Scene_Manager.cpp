@@ -6,7 +6,7 @@ Scene_Manager::Scene_Manager()
 	glEnable(GL_DEPTH_TEST);
 
 	shader_manager = new Shader_Manager();
-	shader_manager->CreateProgram("colorShader", "Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
+	shader_manager->CreateProgram("colorShader", "Resources\\Shaders\\Vertex_Shader.glsl", "Resources\\Shaders\\Fragment_Shader.glsl");
 
 	view_matrix = glm::lookAt(glm::vec3(0, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
@@ -23,9 +23,7 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
-	
-
-	time += 1.0 / 60;
+	time += 1.0f / 60.0f;
 
 	view_matrix = glm::lookAt(glm::vec3(3 * glm::cos(time), 1.5 * sin(0.5 * time) + 2, 3 * glm::sin(time)), glm::vec3(0, 0.5, 0), glm::vec3(0, 1, 0));
 
@@ -35,7 +33,7 @@ void Scene_Manager::notifyBeginFrame()
 void Scene_Manager::notifyDisplayFrame()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1, 0.3, 0.1, 1);
+	glClearColor(0.1f, 0.3f, 0.1f, 1.0f);
 
 	models_manager->Draw(projection_matrix, view_matrix, time);
 }

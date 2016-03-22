@@ -1,6 +1,7 @@
 #pragma once
 #include "../IGameObject.h"
 #include "OBJLoader.h"
+#include "../BMPLoader.h"
 #include "glm\glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
@@ -28,6 +29,8 @@ namespace Rendering
 			GLuint vao;
 			GLuint program;
 			std::vector<GLuint> vbos;
+
+			GLuint texture;
 
 			glm::vec3 position;
 			glm::mat4 model_matrix;

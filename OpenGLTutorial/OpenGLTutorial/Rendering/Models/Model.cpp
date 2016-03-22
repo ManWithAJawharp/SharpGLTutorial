@@ -38,6 +38,8 @@ Model::Model(const char* path, glm::vec3 position)
 	this->vao = vao;
 	this->vbos.push_back(vbo);
 
+	//this->texture = BMPLoader::LoadBMP("Resources\\Textures\\priestGreen.bmp");
+
 	this->position = position;
 }
 
@@ -63,6 +65,9 @@ void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matri
 	glUniformMatrix4fv(glGetUniformLocation(program, "projection_matrix"), 1, false, &projection_matrix[0][0]);
 	glUniform1f(glGetUniformLocation(program, "time"), time);
 	glBindVertexArray(vao);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture);
+
 	glDrawArrays(GL_TRIANGLES, 0, verticesN);
 }
 

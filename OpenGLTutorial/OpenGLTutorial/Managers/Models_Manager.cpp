@@ -20,7 +20,7 @@ Models_Manager::Models_Manager()
 	cube->Create();
 	gameModelList["cube"] = cube;
 
-	Models::Model* priest = new Models::Model("Rendering\\Models\\Priest.obj", glm::vec3(0, 0, 0));
+	Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
 	priest->SetProgram(Shader_Manager::GetShader("colorShader"));
 	gameModelList["priest"] = priest;
 }
