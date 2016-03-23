@@ -48,7 +48,7 @@ artifacts/
 *_i.h
 *.ilk
 *.meta
-*.obj
+#*.obj
 *.pch
 *.pdb
 *.pgc
@@ -238,3 +238,15 @@ _Pvt_Extensions
 *.ipdb
 *.lastbuildstate
 *.tlog
+OpenGLTutorial/OpenGLTutorial/Release/Cube.obj
+OpenGLTutorial/OpenGLTutorial/Release/Init_GLEW.obj
+OpenGLTutorial/OpenGLTutorial/Release/Init_GLUT.obj
+OpenGLTutorial/OpenGLTutorial/Release/Model.obj
+OpenGLTutorial/OpenGLTutorial/Release/Models_Manager.obj
+OpenGLTutorial/OpenGLTutorial/Release/OBJLoader.obj
+OpenGLTutorial/OpenGLTutorial/Release/Quad.obj
+OpenGLTutorial/OpenGLTutorial/Release/Scene_Manager.obj
+OpenGLTutorial/OpenGLTutorial/Release/Shader_Manager.obj
+OpenGLTutorial/OpenGLTutorial/Release/Triangle.obj
+OpenGLTutorial/OpenGLTutorial/Release/main.obj
+OpenGLTutorial/Release/Rendering/Models/Priest.obj
