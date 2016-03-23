@@ -20,9 +20,20 @@ namespace Rendering
 		~Framebuffer();
 
 	private:
+		void Destroy();
+
 		void GenerateFBO(unsigned int width, unsigned int height);
 
 		void GenerateColorTexture(unsigned int width, unsigned int height);
 		void GenerateDepthTexture(unsigned int width, unsigned int height);
+
+	public:
+		const unsigned int& GetColorTexture();
+		const unsigned int& GetDepthTexture();
+
+		void Resize(unsigned int width, unsigned int height);
+
+		void Bind();
+		void Unbind();
 	};
 }

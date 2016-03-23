@@ -9,6 +9,11 @@ Framebuffer::Framebuffer()
 
 Framebuffer::~Framebuffer()
 {
+	Destroy();
+}
+
+void Framebuffer::Destroy()
+{
 	glDeleteFramebuffers(1, &FBO);
 	glDeleteTextures(1, &texture_color);
 	glDeleteTextures(1, &texture_depth);
@@ -28,6 +33,7 @@ void Framebuffer::GenerateFBO(unsigned int width, unsigned int height)
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, texture_depth, 0);//optional
 
 	drawbuffer.push_back(GL_COLOR_ATTACHMENT0 + attachment_index_color_texture);    //add attachements
+	glDrawBuffers(drawbuffer.size(), &drawbuffer[0]);
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {  //Check for FBO completeness
 		std::cout << "Error! FrameBuffer is not complete" << std::endl;
@@ -56,4 +62,30 @@ void Framebuffer::GenerateDepthTexture(unsigned int width, unsigned int height)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+}
+
+const unsigned int& Framebuffer::GetColorTexture()
+{
+	return texture_color;
+}
+
+const unsigned int& Framebuffer::GetDepthTexture()
+{
+	return texture_depth;
+}
+
+void Framebuffer::Resize(unsigned int width, unsigned int height)
+{
+	Destroy();
+	GenerateFBO(width, height);
+}
+
+void Framebuffer::Bind()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+}
+
+void Framebuffer::Unbind()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

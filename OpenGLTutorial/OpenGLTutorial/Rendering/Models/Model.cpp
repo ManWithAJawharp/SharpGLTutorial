@@ -58,6 +58,7 @@ void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matri
 
 	glUseProgram(program);
 
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
 
