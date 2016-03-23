@@ -8,7 +8,7 @@ using namespace Init;
 int main(int argc, char **argv)
 {
 	WindowInfo window(std::string("OpenGL Beginner Tutorial"),
-		400, 200, 800, 600, true);
+		400, 300, 800, 600, true);
 
 	ContextInfo context(4, 5, true);
 

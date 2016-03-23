@@ -71,8 +71,8 @@ void Init_GLUT::displayCallback()
 
 	//std::cout << lastTime << ", " << currentTime << std::endl;
 	nbFrames++;
-	if (currentTime - lastTime >= 1000) { // If last prinf() was more than 1 sec ago
-										 // printf and reset timer
+	if (currentTime - lastTime >= 1000)
+	{
 		printf("%f ms/frame\n", 1000.0 / double(nbFrames));
 		nbFrames = 0;
 		lastTime += 1000;
