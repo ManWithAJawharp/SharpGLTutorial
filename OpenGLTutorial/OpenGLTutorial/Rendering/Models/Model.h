@@ -14,7 +14,7 @@ namespace Rendering
 		{
 		public:
 			Model(glm::vec3 position);
-			Model(const char* path, glm::vec3 position);
+			Model(const char* modelPath, const char* texturePath, glm::vec3 position);
 			virtual ~Model();
 
 			virtual void Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time) override;
@@ -29,6 +29,8 @@ namespace Rendering
 			GLuint vao;
 			GLuint program;
 			std::vector<GLuint> vbos;
+
+			unsigned int num_vertices;
 
 			GLuint texture;
 

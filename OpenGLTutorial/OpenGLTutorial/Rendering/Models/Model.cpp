@@ -3,22 +3,20 @@
 using namespace Rendering;
 using namespace Models;
 
-unsigned int verticesN;
-
 Model::Model(glm::vec3 position)
 {
 	this->position = position;
 }
 
-Model::Model(const char* path, glm::vec3 position)
+Model::Model(const char* modelPath, const char* texturePath, glm::vec3 position)
 {
 	std::vector<VertexFormat> vertices;
 
-	OBJLoader::LoadOBJ(path, vertices);
+	OBJLoader::LoadOBJ(modelPath, vertices);
 
-	this->texture = TextureLoader::LoadTexture("Resources\\Textures\\priestGreen.bmp", 256, 256);
+	this->texture = TextureLoader::LoadTexture(texturePath, 256, 256);
 
-	verticesN = vertices.size();
+	num_vertices = vertices.size();
 
 	GLuint vao;
 	GLuint vbo;
@@ -26,13 +24,9 @@ Model::Model(const char* path, glm::vec3 position)
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	//glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
-
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * verticesN, &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * num_vertices, &vertices[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)0);
 	glEnableVertexAttribArray(1);
@@ -60,15 +54,12 @@ void Model::Update()
 void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time)
 {
 	model_matrix = glm::mat4();
-	/*model_matrix = glm::rotate_slow(model_matrix, 0.5f * time, glm::vec3(0, 1, 0));
-	model_matrix = glm::rotate_slow(model_matrix, 1.0f * time, glm::vec3(0, 0, 1));*/
 	model_matrix = glm::translate(model_matrix, position);
 
 	glUseProgram(program);
 
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, texture);
-	//glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
 
 	glUniformMatrix4fv(glGetUniformLocation(program, "model_matrix"), 1, false, &model_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "view_matrix"), 1, false, &view_matrix[0][0]);
@@ -77,7 +68,7 @@ void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matri
 	glUniform1f(glGetUniformLocation(program, "time"), time);
 	glBindVertexArray(vao);
 
-	glDrawArrays(GL_TRIANGLES, 0, verticesN);
+	glDrawArrays(GL_TRIANGLES, 0, num_vertices);
 }
 
 void Model::SetProgram(GLuint program)

@@ -5,28 +5,18 @@ using namespace Rendering;
 
 Models_Manager::Models_Manager()
 {
-	/*Models::Triangle* triangle = new Models::Triangle();
-	triangle->SetProgram(Shader_Manager::GetShader("colorShader"));
-	triangle->Create();
-	gameModelList["triangle"] = triangle;
+	Models::Cube* cube0 = new Models::Cube(glm::vec3(0, -1, 0));
+	cube0->SetProgram(Shader_Manager::GetShader("colorShader"));
+	cube0->Create();
+	gameModelList["cube0"] = cube0;
 
-	Models::Quad* quad = new Models::Quad();
-	quad->SetProgram(Shader_Manager::GetShader("colorShader"));
-	quad->Create();
-	gameModelList["quad"] = quad;*/
-
-	Models::Cube* cube = new Models::Cube(glm::vec3(0, -1, 0));
-	cube->SetProgram(Shader_Manager::GetShader("colorShader"));
-	cube->Create();
-	gameModelList["cube"] = cube;
-
-	Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
+	Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", "Resources\\Textures\\priestGreen.bmp", glm::vec3(-1, 0, 1));
 	priest->SetProgram(Shader_Manager::GetShader("colorShader"));
 	gameModelList["priest"] = priest;
 
-	/*Models::Model* suzanne = new Models::Model("Resources\\Models\\Suzanne.obj", glm::vec3(0, 1, 0));
+	Models::Model* suzanne = new Models::Model("Resources\\Models\\Suzanne.obj", "Resources\\Textures\\priestGreen.bmp", glm::vec3(1, 1, -1));
 	suzanne->SetProgram(Shader_Manager::GetShader("colorShader"));
-	gameModelList["suzanne"] = suzanne;*/
+	gameModelList["suzanne"] = suzanne;
 }
 
 Models_Manager::~Models_Manager()
