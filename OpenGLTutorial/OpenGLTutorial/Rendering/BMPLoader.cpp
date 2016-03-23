@@ -36,7 +36,7 @@ unsigned int TextureLoader::LoadTexture(const std::string& filename,
 
 	//when we work with textures of sizes not divisible by 4 we have to use the line reader
 	//which loads the textures in OpenGL so as it can work with a 1 alligned memory (default is 4)
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
 	//Generates texture
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);

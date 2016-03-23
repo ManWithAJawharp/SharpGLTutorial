@@ -17,7 +17,7 @@ namespace Rendering
 			Model(const char* path, glm::vec3 position);
 			virtual ~Model();
 
-			virtual void Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time) override;
+			virtual void Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time) override;
 			virtual void Update() override;
 			virtual void SetProgram(GLuint shaderName) override;
 			virtual void Destroy() override;

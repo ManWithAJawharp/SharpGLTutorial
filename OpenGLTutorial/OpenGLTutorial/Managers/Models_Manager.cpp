@@ -20,13 +20,13 @@ Models_Manager::Models_Manager()
 	cube->Create();
 	gameModelList["cube"] = cube;
 
-	/*Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
+	Models::Model* priest = new Models::Model("Resources\\Models\\Priest.obj", glm::vec3(0, 0, 0));
 	priest->SetProgram(Shader_Manager::GetShader("colorShader"));
-	gameModelList["priest"] = priest;*/
+	gameModelList["priest"] = priest;
 
-	Models::Model* suzanne = new Models::Model("Resources\\Models\\Suzanne.obj", glm::vec3(0, 1, 0));
+	/*Models::Model* suzanne = new Models::Model("Resources\\Models\\Suzanne.obj", glm::vec3(0, 1, 0));
 	suzanne->SetProgram(Shader_Manager::GetShader("colorShader"));
-	gameModelList["suzanne"] = suzanne;
+	gameModelList["suzanne"] = suzanne;*/
 }
 
 Models_Manager::~Models_Manager()
@@ -54,10 +54,10 @@ void Models_Manager::Update()
 	}
 }
 
-void Models_Manager::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time)
+void Models_Manager::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time)
 {
 	for (auto model : gameModelList)
 	{
-		model.second->Draw(projection_matrix, view_matrix, time);
+		model.second->Draw(projection_matrix, view_matrix, viewPosition, time);
 	}
 }

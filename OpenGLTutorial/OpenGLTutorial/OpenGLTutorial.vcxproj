@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
+    <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="Managers\Models_Manager.cpp" />
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp" />
@@ -145,11 +146,14 @@
     <ClInclude Include="Dependencies\glew\glew.h" />
     <ClInclude Include="Dependencies\glew\glxew.h" />
     <ClInclude Include="Dependencies\glew\wglew.h" />
+    <ClInclude Include="GameObjects\GameObject.h" />
+    <ClInclude Include="GameObjects\Transform.h" />
     <ClInclude Include="Managers\Models_Manager.h" />
     <ClInclude Include="Managers\Scene_Manager.h" />
     <ClInclude Include="Managers\Shader_Manager.h" />
     <ClInclude Include="Rendering\BMP_Header.h" />
     <ClInclude Include="Rendering\BMPLoader.h" />
+    <ClInclude Include="Rendering\Camera.h" />
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Cube.h" />
     <ClInclude Include="Rendering\Models\Model.h" />

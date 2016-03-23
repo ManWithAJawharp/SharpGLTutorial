@@ -1,5 +1,6 @@
 #pragma once
 #include "Model.h"
+#include "../../Managers/Shader_Manager.h"
 
 namespace Rendering
 {
@@ -12,7 +13,7 @@ namespace Rendering
 			~Quad();
 
 			void Create();
-			virtual void Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time) override final;
+			void Draw(const float& time, unsigned int width, unsigned int height);
 			virtual void Update() override final;
 		};
 	}

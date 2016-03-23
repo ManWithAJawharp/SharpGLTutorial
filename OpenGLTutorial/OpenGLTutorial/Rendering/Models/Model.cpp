@@ -16,7 +16,7 @@ Model::Model(const char* path, glm::vec3 position)
 
 	OBJLoader::LoadOBJ(path, vertices);
 
-	this->texture = TextureLoader::LoadTexture("Resources\\Textures\\Suzanne_Diff.bmp", 1024, 1024);
+	this->texture = TextureLoader::LoadTexture("Resources\\Textures\\priestGreen.bmp", 256, 256);
 
 	verticesN = vertices.size();
 
@@ -26,10 +26,9 @@ Model::Model(const char* path, glm::vec3 position)
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	unsigned int textureLocation = glGetUniformLocation(program, "textureSampler");
-	glUniform1i(textureLocation, 0);
+	glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -58,7 +57,7 @@ void Model::Update()
 {
 }
 
-void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const float& time)
+void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time)
 {
 	model_matrix = glm::mat4();
 	/*model_matrix = glm::rotate_slow(model_matrix, 0.5f * time, glm::vec3(0, 1, 0));
@@ -66,9 +65,15 @@ void Model::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matri
 	model_matrix = glm::translate(model_matrix, position);
 
 	glUseProgram(program);
+
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture);
+	//glUniform1i(glGetUniformLocation(program, "textureSampler"), 0);
+
 	glUniformMatrix4fv(glGetUniformLocation(program, "model_matrix"), 1, false, &model_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "view_matrix"), 1, false, &view_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "projection_matrix"), 1, false, &projection_matrix[0][0]);
+	glUniform3fv(glGetUniformLocation(program, "viewPosition"), 1, &viewPosition[0]);
 	glUniform1f(glGetUniformLocation(program, "time"), time);
 	glBindVertexArray(vao);
 

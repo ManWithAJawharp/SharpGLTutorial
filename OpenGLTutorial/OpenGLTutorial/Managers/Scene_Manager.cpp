@@ -8,9 +8,15 @@ Scene_Manager::Scene_Manager()
 	shader_manager = new Shader_Manager();
 	shader_manager->CreateProgram("colorShader", "Resources\\Shaders\\Vertex_Shader.glsl", "Resources\\Shaders\\Fragment_Shader.glsl");
 
-	view_matrix = glm::lookAt(glm::vec3(0, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	camera = new GameObjects::GameObject(glm::vec3(3, 3, -3));
+	camera->transform.rotation = glm::vec3(0, 0, 0);
+
+	view_matrix = glm::lookAt(glm::vec3(3, 3, -3), glm::vec3(0, 0.5, 0), glm::vec3(0, 1, 0));
 
 	models_manager = new Models_Manager();
+
+	renderQuad = new Models::Quad(glm::vec3(0, 0, 0));
+	renderQuad->Create();
 
 	time = 0.0;
 }
@@ -26,6 +32,8 @@ void Scene_Manager::notifyBeginFrame()
 	time += 1.0f / 60.0f;
 
 	view_matrix = glm::lookAt(glm::vec3(3 * glm::cos(time), 1.5 * sin(0.5 * time) + 2, 3 * glm::sin(time)), glm::vec3(0, 0.5, 0), glm::vec3(0, 1, 0));
+ 
+	camera->transform.position = glm::vec3(3 * glm::cos(time), 1.5 * sin(0.5 * time) + 2, 3 * glm::sin(time));
 
 	models_manager->Update();
 }
@@ -35,7 +43,7 @@ void Scene_Manager::notifyDisplayFrame()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.1f, 0.3f, 0.1f, 1.0f);
 
-	models_manager->Draw(projection_matrix, view_matrix, time);
+	models_manager->Draw(projection_matrix, view_matrix, camera->transform.position, time);
 }
 
 void Scene_Manager::notifyEndFrame()
@@ -45,6 +53,9 @@ void Scene_Manager::notifyEndFrame()
 
 void Scene_Manager::notifyReshape(int width, int height, int prev_width, int prev_height)
 {
+	screenWidth = width;
+	screenHeight = height;
+
 	float ar = (float)glutGet(GLUT_WINDOW_WIDTH) /
 		(float)glutGet(GLUT_WINDOW_HEIGHT);
 	float angle = 45.0f, near1 = 0.1f, far1 = 2000.0f;
