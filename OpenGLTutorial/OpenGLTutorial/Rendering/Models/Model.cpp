@@ -1,4 +1,5 @@
 #include "Model.h"
+#include "../../Dependencies/soil/SOIL.h"
 
 using namespace Rendering;
 using namespace Models;
