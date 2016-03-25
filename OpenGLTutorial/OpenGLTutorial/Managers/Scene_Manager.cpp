@@ -5,6 +5,7 @@ Scene_Manager::Scene_Manager()
 {
 	glEnable(GL_DEPTH_TEST);
 
+	lightmapFbo = Framebuffer();
 	sceneFbo = Framebuffer();
 	ppFbo = Framebuffer();
 
@@ -30,6 +31,7 @@ Scene_Manager::~Scene_Manager()
 {
 	delete shader_manager;
 	delete models_manager;
+	lightmapFbo.~Framebuffer();
 	sceneFbo.~Framebuffer();
 	ppFbo.~Framebuffer();
 }
@@ -47,13 +49,22 @@ void Scene_Manager::notifyBeginFrame()
 
 void Scene_Manager::notifyDisplayFrame()
 {
+	glm::mat4 lightMatrix = glm::lookAt(glm::vec3(5, 5, 5), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+	lightmapFbo.Bind();
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		models_manager->Draw(projection_matrix, view_matrix, camera->transform.position, lightmapFbo.GetColorTexture(), lightMatrix, time);
+	}
+	lightmapFbo.Unbind();
 
 	sceneFbo.Bind();
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.1f, 0.3f, 0.1f, 1.0f);
 
-		models_manager->Draw(projection_matrix, view_matrix, camera->transform.position, time);
+		models_manager->Draw(projection_matrix, view_matrix, camera->transform.position, lightmapFbo.GetDepthTexture(), lightMatrix, time);
 	}
 	sceneFbo.Unbind();
 
@@ -92,6 +103,7 @@ void Scene_Manager::notifyReshape(int width, int height, int prev_width, int pre
 
 	projection_matrix = glm::perspective(45.0f, ar, 0.1f, 2000.0f);
 
+	lightmapFbo.Resize(1024, 1024);
 	sceneFbo.Resize(width, height);
 	ppFbo.Resize(width, height);
 }

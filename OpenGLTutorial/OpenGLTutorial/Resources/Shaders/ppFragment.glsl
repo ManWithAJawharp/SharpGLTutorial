@@ -68,5 +68,14 @@ void main()
 	}
 	
 	float dof = clamp(2 * (0.8 - pow(depth, 16)), 0, 1);
-	out_color = vec4((1 - dof) * blur + dof * color.rgb, depth);
+	
+
+	if (pass == 0)
+	{
+		out_color = vec4((1 - dof) * blur + dof * color.rgb, depth);
+	}
+	else
+	{
+		out_color = vec4(pow((1 - dof) * blur + dof * color.rgb, vec3(1.0 / 1.8)), depth);
+	}
 }

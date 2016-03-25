@@ -4,6 +4,7 @@
 #include "../Core/Init/IListener.h"
 #include "../GameObjects/GameObject.h"
 #include "../Rendering/Framebuffer.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace Managers
 {
@@ -21,6 +22,7 @@ namespace Managers
 	private:
 		unsigned int screenWidth, screenHeight;
 
+		Framebuffer lightmapFbo;
 		Framebuffer sceneFbo;
 		Framebuffer ppFbo;
 

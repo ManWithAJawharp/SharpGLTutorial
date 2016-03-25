@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E6F26F23-0B3E-4444-869A-10C819BD3479}</ProjectGuid>
-    <RootNamespace>OpenGLTutorial</RootNamespace>
+    <ProjectGuid>{3B56C28A-ED40-4DCE-9DC0-D7EA22A3CE24}</ProjectGuid>
+    <RootNamespace>TripEngine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -75,10 +75,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>Dependencies\freeglut;Dependencies\glew;Dependencies\soil</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -86,10 +82,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Dependencies\freeglut;Dependencies\glew</AdditionalLibraryDirectories>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -118,73 +110,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Init\Init_GLEW.cpp" />
-    <ClCompile Include="Core\Init\Init_GLUT.cpp" />
-    <ClCompile Include="GameObjects\GameObject.cpp" />
-    <ClCompile Include="Managers\Models_Manager.cpp" />
-    <ClCompile Include="Managers\Scene_Manager.cpp" />
-    <ClCompile Include="Managers\Shader_Manager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Rendering\BMPLoader.cpp" />
-    <ClCompile Include="Rendering\Framebuffer.cpp" />
-    <ClCompile Include="Rendering\Models\Cube.cpp" />
-    <ClCompile Include="Rendering\Models\Model.cpp" />
-    <ClCompile Include="Rendering\Models\OBJLoader.cpp" />
-    <ClCompile Include="Rendering\Models\Quad.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Core\Init\ContextInfo.h" />
-    <ClInclude Include="Core\Init\FrameBufferInfo.h" />
-    <ClInclude Include="Core\Init\IListener.h" />
-    <ClInclude Include="Core\Init\Init_GLEW.h" />
-    <ClInclude Include="Core\Init\Init_GLUT.h" />
-    <ClInclude Include="Core\Init\WindowInfo.h" />
-    <ClInclude Include="Dependencies\freeglut\freeglut.h" />
-    <ClInclude Include="Dependencies\freeglut\freeglut_ext.h" />
-    <ClInclude Include="Dependencies\freeglut\freeglut_std.h" />
-    <ClInclude Include="Dependencies\freeglut\glut.h" />
-    <ClInclude Include="Dependencies\glew\glew.h" />
-    <ClInclude Include="Dependencies\glew\glxew.h" />
-    <ClInclude Include="Dependencies\glew\wglew.h" />
-    <ClInclude Include="GameObjects\GameObject.h" />
-    <ClInclude Include="GameObjects\Transform.h" />
-    <ClInclude Include="Managers\Models_Manager.h" />
-    <ClInclude Include="Managers\Scene_Manager.h" />
-    <ClInclude Include="Managers\Shader_Manager.h" />
-    <ClInclude Include="Rendering\BMP_Header.h" />
-    <ClInclude Include="Rendering\BMPLoader.h" />
-    <ClInclude Include="Rendering\Camera.h" />
-    <ClInclude Include="Rendering\Framebuffer.h" />
-    <ClInclude Include="Rendering\IGameObject.h" />
-    <ClInclude Include="Rendering\Models\Cube.h" />
-    <ClInclude Include="Rendering\Models\Model.h" />
-    <ClInclude Include="Rendering\Models\OBJLoader.h" />
-    <ClInclude Include="Rendering\Models\Quad.h" />
-    <ClInclude Include="Rendering\VertexFormat.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Dependencies\freeglut\freeglut.dll" />
-    <None Include="Dependencies\glew\glew32.dll" />
-    <None Include="packages.config" />
-    <None Include="Resources\Shaders\Fragment_Shader.glsl" />
-    <None Include="Resources\Shaders\ppFragment.glsl" />
-    <None Include="Resources\Shaders\ppVertex.glsl" />
-    <None Include="Resources\Shaders\Vertex_Shader.glsl" />
-    <None Include="Shaders\Fragment_Shader.glsl" />
-    <None Include="Shaders\Vertex_Shader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Dependencies\freeglut\freeglut.lib" />
-    <Library Include="Dependencies\glew\glew32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\glm.0.9.6\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.6\build\native\glm.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\glm.0.9.6\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.6\build\native\glm.targets'))" />
-  </Target>
 </Project>

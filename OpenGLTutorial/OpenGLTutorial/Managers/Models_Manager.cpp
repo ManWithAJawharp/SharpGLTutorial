@@ -44,10 +44,10 @@ void Models_Manager::Update()
 	}
 }
 
-void Models_Manager::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time)
+void Models_Manager::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const unsigned int& lightmapTexture, const glm::mat4& lightMatrix, const float& time)
 {
 	for (auto model : gameModelList)
 	{
-		model.second->Draw(projection_matrix, view_matrix, viewPosition, time);
+		model.second->Draw(projection_matrix, view_matrix, viewPosition, lightmapTexture, lightMatrix, time);
 	}
 }

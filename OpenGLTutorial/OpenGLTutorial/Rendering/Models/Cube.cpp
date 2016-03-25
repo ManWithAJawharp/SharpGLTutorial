@@ -102,7 +102,7 @@ void Cube::Update()
 {
 }
 
-void Cube::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const float& time)
+void Cube::Draw(const glm::mat4& projection_matrix, const glm::mat4& view_matrix, const glm::vec3& viewPosition, const unsigned int& lightmapTexture, const glm::mat4& lightMatrix, const float& time)
 {
 	model_matrix = glm::mat4();
 	model_matrix = glm::scale(model_matrix, glm::vec3(4.0, 0.5f, 4.0));

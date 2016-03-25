@@ -24,6 +24,9 @@ void Quad::Create()
 {
 	Managers::Shader_Manager::CreateProgram("postProcessing", "Resources\\Shaders\\ppVertex.glsl", "Resources\\Shaders\\ppFragment.glsl");
 	program = Managers::Shader_Manager::GetShader("postProcessing");
+	Managers::Shader_Manager::CreateProgram("lightmap", "Resources\\Shaders\\ppVertex.glsl", "Resources\\Shaders\\lightmapFragment.glsl");
+	lightmapProgram = Managers::Shader_Manager::GetShader("lightmap");
+
 
 	struct Vertex {
 		glm::vec3 position;
@@ -69,6 +72,16 @@ void Quad::Create()
 void Quad::Update()
 {
 
+}
+
+void Quad::Lightmap(const glm::mat4& light_matrix)
+{
+	glUseProgram(lightmapProgram);
+	
+	glUniformMatrix4fv(glGetUniformLocation(lightmapProgram, "light_matrix"), 1, false, &light_matrix[0][0]);
+
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void Quad::Draw(const unsigned int& color, const unsigned int& depth, const float& time, const unsigned int& pass, const glm::mat4& i_pv_matrix, unsigned int width, unsigned int height)
