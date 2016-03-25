@@ -5,7 +5,8 @@ Scene_Manager::Scene_Manager()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	fbo = Framebuffer();
+	sceneFbo = Framebuffer();
+	ppFbo = Framebuffer();
 
 	shader_manager = new Shader_Manager();
 	shader_manager->CreateProgram("colorShader", "Resources\\Shaders\\Vertex_Shader.glsl", "Resources\\Shaders\\Fragment_Shader.glsl");
@@ -29,8 +30,8 @@ Scene_Manager::~Scene_Manager()
 {
 	delete shader_manager;
 	delete models_manager;
-	fbo.~Framebuffer();
-	//delete fbo;
+	sceneFbo.~Framebuffer();
+	ppFbo.~Framebuffer();
 }
 
 void Scene_Manager::notifyBeginFrame()
@@ -47,21 +48,31 @@ void Scene_Manager::notifyBeginFrame()
 void Scene_Manager::notifyDisplayFrame()
 {
 
-	fbo.Bind();
+	sceneFbo.Bind();
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.1f, 0.3f, 0.1f, 1.0f);
 
 		models_manager->Draw(projection_matrix, view_matrix, camera->transform.position, time);
 	}
-	fbo.Unbind();
+	sceneFbo.Unbind();
+
+	ppFbo.Bind();
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glm::mat4 i_pv_matrix = glm::inverse(projection_matrix * glm::translate(view_matrix, glm::vec3(0, -camera->transform.position.y, 0)));
+
+		renderQuad->Draw(sceneFbo.GetColorTexture(), sceneFbo.GetDepthTexture(), time, 0, i_pv_matrix, screenWidth, screenHeight);
+	}
+	ppFbo.Unbind();
 
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 i_pv_matrix = glm::inverse(projection_matrix * glm::translate(view_matrix, glm::vec3(0, -camera->transform.position.y, 0)));
 
-		renderQuad->Draw(fbo.GetColorTexture(), fbo.GetDepthTexture(), time, i_pv_matrix, screenWidth, screenHeight);
+		renderQuad->Draw(ppFbo.GetColorTexture(), ppFbo.GetDepthTexture(), time, 1, i_pv_matrix, screenWidth, screenHeight);
 	}
 }
 
@@ -79,13 +90,8 @@ void Scene_Manager::notifyReshape(int width, int height, int prev_width, int pre
 		(float)glutGet(GLUT_WINDOW_HEIGHT);
 	float angle = 45.0f, near1 = 0.1f, far1 = 2000.0f;
 
-	/*projection_matrix[0][0] = 1.0f / (ar * tan(angle / 2.0f));
-	projection_matrix[1][1] = 1.0f / tan(angle / 2.0f);
-	projection_matrix[2][2] = (-near1 - far1) / (near1 - far1);
-	projection_matrix[2][3] = 1.0f;
-	projection_matrix[3][2] = 2.0f * near1 * far1 / (near1 - far1);*/
-
 	projection_matrix = glm::perspective(45.0f, ar, 0.1f, 2000.0f);
 
-	fbo.Resize(width, height);
+	sceneFbo.Resize(width, height);
+	ppFbo.Resize(width, height);
 }

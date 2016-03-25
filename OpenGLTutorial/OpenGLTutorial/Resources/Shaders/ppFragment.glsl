@@ -1,9 +1,9 @@
 //blur fragment shader
 #version 450 core
 
-layout(location = 0) out vec3 out_color;
+layout(location = 0) out vec4 out_color;
 
-const float weights[4] = float[] (0.726, 0.278, 0.055, 0.005);
+const float weights[5] = float[] (0.152781, 0.144599, 0.122589, 0.093095, 0.063327);
 
 const vec3 ambientCol = vec3(0.1, 0.3, 0.1);
 const vec3 fogCol = vec3(0.5, 0.9, 0.3);
@@ -12,6 +12,7 @@ uniform sampler2D texture_color;
 uniform sampler2D texture_depth; 
 
 uniform float time;
+uniform int pass = 0;
 
 uniform mat4 i_pv_matrix;
 
@@ -39,18 +40,33 @@ in vec2 uv;
 
 void main()
 {
-	vec3 col = texture(texture_color, uv).rgb;
-	float depth = clamp(0.5 - pow(texture(texture_depth, uv).r, 32), 0, 1);
+	vec4 color = texture(texture_color, uv).rgba;
+	float depth;
 
-	float offset = depth * 10.0 / screen_width;
-	vec3 blur = depth * col;
-	for (int i = 0; i < 4; i++)
+	vec3 blur = color.rgb * weights[0];
+	float pixelOffset = 3.0;
+	vec2 offset;
+
+	if (pass == 0)
 	{
-		blur += depth * texture(texture_color, uv + vec2(offset * i, 0)).rgb * weights[i];
-		blur += depth * texture(texture_color, uv + vec2(- offset * i, 0)).rgb * weights[i];
+		depth = texture(texture_depth, uv).r;
+
+		offset = vec2(pixelOffset / screen_width, 0);
+	}
+	else
+	{
+		depth = color.a;
+
+		offset = vec2(0, pixelOffset / screen_height);
 	}
 
-	//blur /= 11;
-
-	out_color = blur;
+	for (int i = 1; i < 5; i++)
+	{
+		vec3 col = texture(texture_color, uv + i * offset).rgb + 
+					texture(texture_color, uv - i * offset).rgb;
+		blur += weights[i] * col;
+	}
+	
+	float dof = clamp(2 * (0.8 - pow(depth, 16)), 0, 1);
+	out_color = vec4((1 - dof) * blur + dof * color.rgb, depth);
 }

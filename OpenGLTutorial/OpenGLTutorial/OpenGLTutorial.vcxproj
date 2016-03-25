@@ -168,6 +168,10 @@
     <None Include="Dependencies\freeglut\freeglut.dll" />
     <None Include="Dependencies\glew\glew32.dll" />
     <None Include="packages.config" />
+    <None Include="Resources\Shaders\Fragment_Shader.glsl" />
+    <None Include="Resources\Shaders\ppFragment.glsl" />
+    <None Include="Resources\Shaders\ppVertex.glsl" />
+    <None Include="Resources\Shaders\Vertex_Shader.glsl" />
     <None Include="Shaders\Fragment_Shader.glsl" />
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>

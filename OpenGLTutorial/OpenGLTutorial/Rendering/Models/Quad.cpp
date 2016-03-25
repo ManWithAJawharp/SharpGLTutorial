@@ -71,7 +71,7 @@ void Quad::Update()
 
 }
 
-void Quad::Draw(const unsigned int& color, const unsigned int& depth, const float& time, const glm::mat4& i_pv_matrix, unsigned int width, unsigned int height)
+void Quad::Draw(const unsigned int& color, const unsigned int& depth, const float& time, const unsigned int& pass, const glm::mat4& i_pv_matrix, unsigned int width, unsigned int height)
 {
 	glUseProgram(program);
 
@@ -84,6 +84,7 @@ void Quad::Draw(const unsigned int& color, const unsigned int& depth, const floa
 
 	glUniformMatrix4fv(glGetUniformLocation(program, "i_pv_matrix"), 1, false, &i_pv_matrix[0][0]);
 	glUniform1f(glGetUniformLocation(program, "time"), time);
+	glUniform1i(glGetUniformLocation(program, "pass"), pass);
 	glUniform1i(glGetUniformLocation(program, "screen_width"), width);
 	glUniform1i(glGetUniformLocation(program, "screen_height"), height);
 

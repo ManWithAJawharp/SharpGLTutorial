@@ -21,7 +21,8 @@ namespace Managers
 	private:
 		unsigned int screenWidth, screenHeight;
 
-		Framebuffer fbo;
+		Framebuffer sceneFbo;
+		Framebuffer ppFbo;
 
 		Managers::Shader_Manager* shader_manager;
 		Managers::Models_Manager* models_manager;
